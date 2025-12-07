@@ -1,6 +1,6 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.document_loaders import UnstructuredPDFLoader
-from utils.helpers import clean_docs
+from backend.app.utils.helpers import clean_docs
 
 
 class PDFParser:
@@ -10,7 +10,7 @@ class PDFParser:
         self._clean_docs = clean_docs(self._docs)
     
     def define_parser(self, complex_file, file_path):
-        if file_path.endswith(".pdf"):
+        if complex_file:
             return PyPDFLoader(file_path)
         else:
             return UnstructuredPDFLoader(file_path)

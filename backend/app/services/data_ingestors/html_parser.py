@@ -18,3 +18,6 @@ class HtmlParser:
                 metadata={"source": self._url}
                 ))
         self._docs = clean_docs(self._docs)
+        
+    def get_docs(self):
+        return self._docs
