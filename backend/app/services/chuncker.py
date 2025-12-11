@@ -1,5 +1,4 @@
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_text_splitters import SentenceTransformersTokenTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter, SentenceTransformersTokenTextSplitter
 from langchain_community.document_transformers.openai_functions import create_metadata_tagger
 from langchain_openai import ChatOpenAI
 from os import environ
@@ -23,7 +22,7 @@ class Chunker:
         self.transformer, self.schema = self.create_schema_and_transformers()
         
         
-    def chunck(self, docs, sementic = True):
+    def chunk(self, docs, sementic = True):
         tagged_docs = self.add_metadata(docs)
         if sementic:
             return self.chunk_sementic(tagged_docs)

@@ -10,7 +10,7 @@ class EmbeddingEngine:
         self.collection = collection
         self.embeddings = OpenAIEmbeddings(openai_api_key=api_key)
         
-    def create_embedding(self, docs, reset):
+    def create_and_store(self, docs, reset):
         if reset:
             reset_collection()
         self.vector_search = MongoDBAtlasVectorSearch(
