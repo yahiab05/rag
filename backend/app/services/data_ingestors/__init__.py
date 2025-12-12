@@ -1,5 +1,5 @@
-from html_parser import HtmlParser
-from pdf_parser import PDFParser
+from .html_parser import HtmlParser
+from .pdf_parser import PDFParser
 
 def create_parser(file_path):
     if file_path.endswith(".pdf"):

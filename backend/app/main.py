@@ -1,3 +1,3 @@
-from services.chuncker import main
+from services.data_ingestion_pipeline import data_ingestion_pipeline
 
-main()
+data_ingestion_pipeline(file_path="../vectors.pdf", reset=True)
