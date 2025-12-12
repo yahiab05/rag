@@ -1,5 +1,5 @@
 import mongomock
-from services.data_ingestion_pipeline import data_ingestion_pipeline
+from ..data_ingestion_pipeline import data_ingestion_pipeline
 
 def test_full_pipeline_with_mongomock(mocker):
     # --- 1. Mock Parser ---

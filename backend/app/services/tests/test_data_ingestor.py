@@ -1,5 +1,5 @@
 import pytest
-from data_ingestors import create_parser
+from ..data_ingestors import create_parser
 
 def test_create_parser_returns_correct_instance():
     parser = create_parser("dummy.pdf")

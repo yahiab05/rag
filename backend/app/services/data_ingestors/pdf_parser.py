@@ -1,5 +1,5 @@
 from langchain_community.document_loaders import PyPDFLoader
-from . import Parse
+from .base_parser import Parse
 
 class PDFParser(Parse):
     def __init__(self, file_path):

@@ -1,6 +1,6 @@
-from data_ingestors import create_parser
-from chuncker import Chunker
-from embedding_engine import EmbeddingEngine
+from .data_ingestors import create_parser
+from .chuncker import Chunker
+from .embedding_engine import EmbeddingEngine
 
 
 def data_ingestion_pipeline(file_path: str, reset: bool):

@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from langchain_core.documents import Document
 import requests
-from . import Parse
+from .base_parser import Parse
 
 
 class HtmlParser(Parse):

@@ -1,4 +1,4 @@
-from chuncker import Chunker
+from ..chuncker import Chunker
 
 def test_chunker_splits_docs():
     docs = ["this is a long document that should be chunked."]

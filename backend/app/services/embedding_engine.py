@@ -1,6 +1,6 @@
 from langchain_openai import OpenAIEmbeddings
 from langchain_mongodb import MongoDBAtlasVectorSearch
-from app.db.db_connection import collection, reset_collection
+from ..db.db_connection import collection, reset_collection
 from os import environ
 
 api_key = environ.get("OPENAI_API_KEY")

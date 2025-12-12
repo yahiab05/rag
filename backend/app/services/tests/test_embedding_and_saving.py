@@ -1,5 +1,5 @@
 import mongomock
-from embedding_engine import EmbeddingEngine
+from ..embedding_engine import EmbeddingEngine
 
 def test_embedding_in_memory_db(mocker):
     mocker.patch("embedding_engine.MongoClient", new=mongomock.MongoClient)
