@@ -2,7 +2,7 @@ import mongomock
 from ..embedding_engine import EmbeddingEngine
 
 def test_embedding_in_memory_db(mocker):
-    mocker.patch("embedding_engine.MongoClient", new=mongomock.MongoClient)
+    mocker.patch("backend.app.db.db_connection._client", new=mongomock.MongoClient)
 
     engine = EmbeddingEngine()
 

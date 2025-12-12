@@ -1,7 +1,10 @@
 from ..chuncker import Chunker
+from langchain_core.documents import Document
 
 def test_chunker_splits_docs():
-    docs = ["this is a long document that should be chunked."]
+    docs = [
+        Document(page_content="this is a long document that should be chunked.")
+        ]
     chunker = Chunker()
 
     chunks = chunker.chunk(docs)
@@ -10,4 +13,4 @@ def test_chunker_splits_docs():
 
 def test_chunk_size():
     chunker = Chunker()
-    assert chunker.sementic_splitter.chunk_size == 500
+    assert chunker.sementic_splitter._chunk_size == 500

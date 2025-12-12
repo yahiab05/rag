@@ -1,9 +1,6 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter, SentenceTransformersTokenTextSplitter
 from langchain_community.document_transformers.openai_functions import create_metadata_tagger
-from langchain_openai import ChatOpenAI
-from os import environ
-
-api_key = environ.get("OPENAI_API_KEY")
+from langchain_ollama import ChatOllama
 
 class Chunker:
     def __init__(self):
@@ -15,10 +12,10 @@ class Chunker:
             chunk_size=500, 
             chunk_overlap=150
             )
-        self.llm = ChatOpenAI(openai_api_key=api_key, 
-                                temperature=0,
-                                model_name="gpt-3.5-turbo",
-                            )
+        self.llm = ChatOllama(
+            model="mistral",
+            temperature=0
+        )
         self.transformer, self.schema = self.create_schema_and_transformers()
         
         
