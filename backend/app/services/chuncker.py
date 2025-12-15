@@ -1,6 +1,7 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter, SentenceTransformersTokenTextSplitter
-from langchain_community.document_transformers.openai_functions import create_metadata_tagger
 from langchain_ollama import ChatOllama
+import json
+
 
 class Chunker:
     def __init__(self):
@@ -16,7 +17,6 @@ class Chunker:
             model="mistral",
             temperature=0
         )
-        self.transformer, self.schema = self.create_schema_and_transformers()
         
         
     def chunk(self, docs, sementic = True):
@@ -33,18 +33,31 @@ class Chunker:
         return self.recursive_splitter.split_documents(docs)
     
     def add_metadata(self, docs):
-        return self.transformer.transform_documents(docs)
-    
-    def create_schema_and_transformers(self): 
-        schema = {
-            "properties":{
-                "title": {"type": "string"},
-                "keywords": {"type": "array", "items": {"type": "string"}},
-                "description": {"type": "string"},
-            },
-            "required": ["title", "keywords", "description"]
-        }
-        
-        transformer = create_metadata_tagger(metadata_schema=schema, llm=self.llm)
-        
-        return transformer, schema
+        batch = [d.page_content for d in docs]
+        metadata_list = self._extract_metadata_batch(batch)
+        for doc, meta in zip(docs, metadata_list):
+            doc.metadata = meta
+        return docs
+
+    def _extract_metadata_batch(self, texts):
+        prompt = f"""
+        You MUST return a JSON array.
+        Each element MUST be an object with:
+        - title (string)
+        - keywords (array of strings)
+        - description (string)
+
+        Return ONLY a JSON array.
+
+        Texts:
+        {json.dumps(texts)}
+        """
+
+
+        response = self.llm.invoke(prompt).content
+        print(type(response))
+        printer = True
+        if printer:
+            print(response)
+            printer = False
+        return json.loads(response)

@@ -1,20 +1,17 @@
-from langchain_openai import OpenAIEmbeddings
+from langchain_ollama import OllamaEmbeddings
 from langchain_mongodb import MongoDBAtlasVectorSearch
 from ..db.db_connection import collection, reset_collection
-from os import environ
-
-api_key = environ.get("OPENAI_API_KEY")
 
 class EmbeddingEngine:
     def __init__(self):
         self.collection = collection
-        self.embeddings = OpenAIEmbeddings(openai_api_key=api_key)
+        self.embeddings = OllamaEmbeddings(model="qwen2.5:0.5b")
         
     def create_and_store(self, docs, reset):
         if reset:
             reset_collection()
-        self.vector_search = MongoDBAtlasVectorSearch(
+        self.vector_search = MongoDBAtlasVectorSearch.from_documents(
             docs,
-            embedding_function=self.embeddings,
+            self.embeddings,
             collection=self.collection,
         )   
