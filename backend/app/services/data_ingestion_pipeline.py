@@ -3,7 +3,7 @@ from .chuncker import Chunker
 from .embedding_engine import EmbeddingEngine
 
 
-def data_ingestion_pipeline(file_path: str, reset: bool):
+def data_ingestion_pipeline(file_path: str, reset: bool = True):
     parser = create_parser(file_path)
     docs = parser.parse()
     
@@ -11,4 +11,4 @@ def data_ingestion_pipeline(file_path: str, reset: bool):
     docs = chunker.chunk(docs)
     
     embedding_engine = EmbeddingEngine()
-    embedding_engine.create_embedding(docs, reset)
+    embedding_engine.create_and_store(docs, reset)
