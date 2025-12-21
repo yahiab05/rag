@@ -1,3 +1,4 @@
+from os import environ
 
 password = "rtkMqFbfPUwIclvL"
 username = "yahiaboukharrata092_db_user"
@@ -15,9 +16,14 @@ def connect():
                         socketTimeoutMS=3000
                         )
 
-    _db = _client["my_db"]
+    _dbName = "my_db"
+    _collectionName = "my_collection"
+    
+    setEnvVariables(_uri, _dbName, _collectionName)
+    
+    _db = _client[_dbName]
 
-    collection = _db["my_collection"]
+    collection = _db[_collectionName]
     
     collection.insert_one({"init": True})
     
@@ -26,3 +32,9 @@ def connect():
 def collection_exists(collection, db):
     
     return collection.name in db.list_collection_names() 
+
+def setEnvVariables(uri, dbName, collectionName):
+    environ["uri"] = uri
+    environ["dbName"] = dbName
+    environ["collectionName"] = collectionName
+    
