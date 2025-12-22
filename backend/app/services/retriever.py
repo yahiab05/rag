@@ -1,27 +1,21 @@
-from langchain_mongodb import MongoDBAtlasVectorSearch
-from langchain_ollama import OllamaEmbeddings
-from os import environ
+from .vector_search import AtlasVectorSearch
+from ..db.db_connection import reset_collection
 
-class Retriever:
+class Retriever(AtlasVectorSearch):
     def __init__(self):
-        _uri = environ["uri"]
-        _dbName = environ["dbName"]
-        _collectionName = environ["collectionName"]
-        
-        self.vectoreStore = MongoDBAtlasVectorSearch.from_connection_string(
-            _uri, _dbName + "." + _collectionName,
-            OllamaEmbeddings(model="qwen2.5:0.5b"),
-            index = "my_index" 
-        )
+        super().__init__()
         
     def query_database(self, query):
-        result =  self.vectoreStore.similarity_search(
-            search_type="similarity",
+        retriever = self.vector_store.as_retriever(
+            search_type="similarity_score_threshold",
             search_kwargs={
                 "k": 5,
-                "score_threshold": 0.01
-            },
+                "score_threshold": 0.3,
+                },
         )
         
-        return result
+        result = retriever.invoke(query)
         
+        if len(result) == 0:
+            raise ValueError("No results found")
+        return result
