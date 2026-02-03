@@ -1,28 +1,33 @@
+from os import environ
+
+def setEnvVariables(uri, dbName, collectionName):
+    environ["uri"] = uri
+    environ["dbName"] = dbName
+    environ["collectionName"] = collectionName
 
 password = "rtkMqFbfPUwIclvL"
 username = "yahiaboukharrata092_db_user"
 appName = "rag"
-def connect():
-    from pymongo import MongoClient
-    from pymongo.server_api import ServerApi
+from pymongo import MongoClient
+from pymongo.server_api import ServerApi
 
-    _uri = f"mongodb+srv://{username}:{password}@{appName}.lbpiqmb.mongodb.net/?retryWrites=true&w=majority"
-    _client = MongoClient(_uri, 
-                        server_api=ServerApi('1'), 
-                        tls=True,
-                        serverSelectionTimeoutMS=3000,  # 3 seconds
-                        connectTimeoutMS=3000,
-                        socketTimeoutMS=3000
-                        )
+_uri = f"mongodb+srv://{username}:{password}@{appName}.lbpiqmb.mongodb.net/?retryWrites=true&w=majority"
+_client = MongoClient(_uri, 
+                    server_api=ServerApi('1'), 
+                    tls=True,
+                    serverSelectionTimeoutMS=3000,  # 3 seconds
+                    connectTimeoutMS=3000,
+                    socketTimeoutMS=3000
+                    )
 
-    _db = _client["my_db"]
+_dbName = "my_db"
+_collectionName = "my_collection"
 
-    collection = _db["my_collection"]
+setEnvVariables(_uri, _dbName, _collectionName)
+
+_db = _client[_dbName]
+
+collection = _db[_collectionName]
+
+collection.insert_one({"init": True})
     
-    collection.insert_one({"init": True})
-    
-    return collection, collection_exists(collection, _db)
-
-def collection_exists(collection, db):
-    
-    return collection.name in db.list_collection_names() 

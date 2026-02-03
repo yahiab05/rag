@@ -1,10 +1,8 @@
-from . import connect
+from . import collection
 
-
-collection, coll_exists = connect()
+coll_exists = collection.find_one({"init": True})
 
 def reset_collection():
     if coll_exists:
         collection.delete_many({})
-        print("Collection reset")
     return
