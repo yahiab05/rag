@@ -1,5 +1,5 @@
-from app.services.answer_generation import AnswerGenerator
-from app.services.data_ingestion_pipeline import data_ingestion_pipeline
+from .app.services.answer_generation import AnswerGenerator
+from .app.services.data_ingestion_pipeline import data_ingestion_pipeline
 from pathlib import Path
 
 
