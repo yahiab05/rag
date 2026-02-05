@@ -5,14 +5,14 @@ import numpy as np
 def test_threshold_filtering():
     retriever = Retriever()
     
-    docs = retriever.query_database("invertible matrix")
+    docs = retriever.query_database("software quality")
     
     assert len(docs) > 0 and len(docs) <= 5
     
 def test_similarity():
     retriever = Retriever()
     
-    query = "invertible matrix"
+    query = "tell me about efficiency"
     
     embedded_query = OllamaEmbeddings(model="qwen2.5:0.5b").embed_query(query)
     
