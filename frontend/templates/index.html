@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Rag</title>
+    </head>
+    <body>
+        <div id="root">
+            <h1>Welcome to the rag app</h1>
+            <hr>
+            <h5>Inputs</h5>
+            <div>
+                <input type="file" name="filepath" id="fileInput" accept=".pdf,.html"/>
+                <input type="text" id="urlInput"/>
+                <button onclick="UploadFile" id="uploadButton">Upload</button>
+                <p id="status"></p>
+            </div>
+            <hr>
+            <h5>Question</h5>
+            <div>
+                <input type="text" id="queryInput">
+                <button id="queryButton" onclick="query()">Query</button>
+            </div>
+            <hr>
+            <h5>Outputs</h5>
+            <div id="outputContainer">
+                waiting...
+            </div>
+        </div>
+    </body>
+    <script src="../static/script.js"></script>
+</html>
