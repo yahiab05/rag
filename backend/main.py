@@ -1,7 +1,11 @@
+from app.services.answer_generation import AnswerGenerator
 from app.services.data_ingestion_pipeline import data_ingestion_pipeline
 from pathlib import Path
 
-path = Path(__file__).parent.absolute()
-data_ingestion_pipeline(file_path=str(path) + "/vectors.pdf", reset=True)
 
-print("Done")
+def saving_docs(file_path):
+    data_ingestion_pipeline(file_path)
+    
+def answer_question(question):
+    answer = AnswerGenerator()
+    return answer.answer(question)
