@@ -27,9 +27,7 @@ rag/
 
 ### Prerequisites
 
-- Python 3.8+
-- MongoDB connection
-- pip or conda for package management
+- Docker installed and working
 
 ### Installation
 
@@ -39,19 +37,11 @@ git clone https://github.com/yahiab05/rag.git
 cd rag
 ```
 
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+2. Build image:
+docker build -t rag .
 
 3. Set up environment variables (if needed for MongoDB connection)
-
-### Running the Application
-
-Start the FastAPI server:
-```bash
-uvicorn app:app --reload
-```
+docker run rag
 
 The application will be available at `http://localhost:8000`
 
