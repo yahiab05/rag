@@ -41,7 +41,8 @@ cd rag
 ```bash
 docker build -t rag .
 ```
-4. Set up environment variables (if needed for MongoDB connection)
+3. Set up environment variables (if needed for MongoDB connection)
+4. Run the application:
 ```bash
 docker run rag
 ```
