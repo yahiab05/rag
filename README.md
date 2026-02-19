@@ -38,11 +38,13 @@ cd rag
 ```
 
 2. Build image:
+```bash
 docker build -t rag .
-
-3. Set up environment variables (if needed for MongoDB connection)
+```
+4. Set up environment variables (if needed for MongoDB connection)
+```bash
 docker run rag
-
+```
 The application will be available at `http://localhost:8000`
 
 ## API Endpoints
