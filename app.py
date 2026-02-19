@@ -40,3 +40,7 @@ async def ask_question(request: Request):
     except ConnectionFailure or ConfigurationError as e:
         return JSONResponse({"answer": "check your internet connection"})
     
+    
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
